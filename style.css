@@ -1,0 +1,58 @@
+*{
+    background-color: white;
+    margin:0;
+    padding:0;
+}
+
+.main, h1, div, form{
+    background-color: beige;
+}
+
+.form{
+    margin-top : 30px;
+}
+
+.inputField{
+    padding:5px;
+    border-radius: 5px;
+}
+
+.subBtn{
+    padding:5px;
+    border-radius: 5px;
+}
+
+
+.main{
+    height:50vh;
+    width:60vw;
+    margin: 150px auto;
+    text-align: center;
+}
+
+.todo-list{
+    margin: 50px;    
+    overflow-y: auto;
+    height: 50%;
+}
+.todo-list__item{
+    display:flex;
+    justify-content: space-evenly;
+    margin: 5px 0 5px;
+}
+
+.todo-list__item__title{
+    text-align: left;
+    width:150px;
+    margin: 5px 0 5px;
+}
+
+.todo-list__item__actions{
+    display: flex;
+    gap: 15px;
+}
+
+.edit, .delete{
+    width:70px;
+    border-radius:10px;
+}
