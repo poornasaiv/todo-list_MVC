@@ -36,7 +36,28 @@ const APIs = (function(){
 
 
 class TodoModel{
+    #todos;
+    constructor(todos = []){
+        this.#todos = todos; 
+    };
+
+    setTodos(newTodos){
+        this.#todos = newTodos;
+    };
+
+    addTodo(newTodo){
+        this.#todos.push(newTodo);
+    };
+
+    deleteTodo(id){
+        this.#todos = this.#todos.filter((todo)=>todo.id!=id);
+    };
+
+    getTodos(){
+        return this.#todos;
     }
+
+}
 
 class TodoView{
     constructor(){
@@ -95,6 +116,10 @@ class TodoView{
     errorAlert(){
         alert("Enter a valid name to add the task");
     };
+
+    clearInput(name){
+        this.input.value = "";
+    };
 }
 
 class TodoController{
@@ -113,6 +138,7 @@ class TodoController{
 
     async fetchTasks(){
         const tasks = await APIs.getTasks();
+        this.model.setTodos(tasks);
         this.view.renderTasks(tasks);
     };
 
@@ -123,11 +149,12 @@ class TodoController{
             if(name!=null && name!="")
             {
                 const title = await APIs.addTask({title : name});
+                this.model.addTodo(name);
                 this.view.renderNewTask(title);
             }else{
                 this.view.errorAlert();
             }
-            this.view.input.value = "";
+            this.view.clearInput();
         })
     };
 
@@ -137,6 +164,7 @@ class TodoController{
             {
                 const id = e.target.parentElement.parentElement.getAttribute("id");
                 await APIs.deleteTask(id);
+                this.model.deleteTodo(id);
                 this.view.removeTaskElement(id);
             }
         })
